@@ -7,7 +7,7 @@ export default function TurfGallery() {
     <section className="md:py-10 my-5">
       <div className="grid grid-cols-1 md:grid-cols-2">
         {/* Left Large Image */}
-        <div className="relative group overflow-hidden rounded-lg">
+        <div className="relative group overflow-hidden">
           <Image
             src="/assets/img/pickle.webp" 
             alt="Main Turf"
@@ -20,7 +20,7 @@ export default function TurfGallery() {
         {/* Right Side Grid (3 Images) */}
         <div className="grid grid-cols-2 grid-rows-2">
           {/* Top Right Large Image */}
-          <div className="col-span-2 relative group overflow-hidden rounded-lg">
+          <div className="col-span-2 relative group overflow-hidden">
             <Image
               src="/assets/img/score.jpg"
               alt="Football Action"
@@ -33,7 +33,7 @@ export default function TurfGallery() {
           </div>
 
           {/* Bottom Two Small Images */}
-          <div className="relative group overflow-hidden rounded-lg">
+          <div className="relative group overflow-hidden">
             <Image
               src="/assets/img/wicket.jpg" 
               alt="Cricket Turf"
@@ -43,7 +43,7 @@ export default function TurfGallery() {
             />
           </div>
 
-          <div className="relative group overflow-hidden rounded-lg">
+          <div className="relative group overflow-hidden">
             <Image
               src="/assets/img/playground.jpg" 
               alt="Evening Turf"

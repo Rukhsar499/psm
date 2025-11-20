@@ -6,53 +6,66 @@ import { motion } from "framer-motion";
 const facilities = [
     {
         title: "CRICKET",
-        desc: "Perfect pitches for tournaments and friendly matches.",
+        desc: "Ideal grounds for competitions and friendly games.",
         icon: (
             <Image
                 src="/assets/img/cricket1.png"
                 alt="Cricket"
                 className="transition duration-300 group-hover:brightness-0"
-                width={60}
-                height={60}
+                width={50}
+                height={50}
             />
         ),
     },
     {
         title: "FOOTBALL",
-        desc: "Turf fields ready for all match types, day or night.",
+        desc: "Turf grounds are prepared for every kind of game, day or night.",
         icon: (
             <Image
                 src="/assets/img/football.png"
                 alt="Cricket"
                 className="transition duration-300 group-hover:brightness-0"
-                width={60}
-                height={60}
+                width={50}
+                height={50}
             />
         ),
     },
     {
-        title: "PICKLEBALL",
-        desc: "Dedicated courts for competitive and casual play.",
+        title: "BASEBALL",
+        desc: "The courts are set aside for both recreational and competitive play.",
         icon: (
-           <Image
+            <Image
                 src="/assets/img/training-gear.png"
                 alt="Cricket"
                 className="transition duration-300 group-hover:brightness-0"
-                width={60}
-                height={60}
+                width={50}
+                height={50}
             />
         ),
     },
     {
-        title: "EVENTS",
-        desc: "Host team games, sports days, and group activities.",
+        title: "VOLLEYBALL",
+        desc: "Organise group activities, sports days, and team games. ",
         icon: (
-           <Image
-                src="/assets/img/red-carpet.png"
+            <Image
+                src="/assets/img/volley.png"
                 alt="Cricket"
                 className="transition duration-300 group-hover:brightness-0"
-                width={60}
-                height={60}
+                width={50}
+                height={50}
+            />
+        ),
+    },
+    {
+        title: "SKATING",
+        desc: "Plan team games, sports days, and group activities.",
+        icon: (
+            <Image
+                src="/assets/img/skateboard.png"
+                alt="Cricket"
+                className="transition duration-300 group-hover:brightness-0"
+                width={50}
+                height={50}
             />
         ),
     },
@@ -60,16 +73,16 @@ const facilities = [
 
 export default function Facilities() {
     return (
-        <section className="bg-[#F3F8F9] md:py-30 py-8">
-            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 px-2">
+        <section className="bg-[#F3F8F9] md:py-30 py-8 md:px-20">
+            <div className="mx-auto grid grid-cols-1 md:grid-cols-5 gap-10">
                 {facilities.map((item, i) => (
                     <motion.div
                         key={i}
                         whileHover={{ scale: 1.05 }}
-                        className="group flex flex-col text-left cursor-pointer"
+                        className="group flex flex-col text-center cursor-pointer"
                     >
-                        <div className="text-green-600">{item.icon}</div>
-                        <h3 className="mt-4 text-[24px] font-semibold">{item.title}</h3>
+                        <div className="text-green-600 flex justify-center">{item.icon}</div>
+                        <h3 className="mt-4 text-[22px] font-semibold">{item.title}</h3>
                         <p className="text-gray-600 mt-2 text-[16px]">{item.desc}</p>
                     </motion.div>
                 ))}
