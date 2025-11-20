@@ -10,7 +10,7 @@ const OrchidArena: React.FC = () => {
             {/* Left Image */}
             <div className="relative w-full md:w-1/2 md:mb-[0] mb-7">
                 <Image
-                    src="/assets/img/5634265.jpg"
+                    src="/assets/img/about-psm.webp"
                     alt="A soccer arena"
                     width={500} // Set appropriate width and height
                     height={300}
@@ -27,7 +27,8 @@ const OrchidArena: React.FC = () => {
                     WELCOME TO PSM TURF
                 </h2>
                 <p className="text-[18px] text-[#656565]">
-                    Our cutting-edge football turf is in multiple locations across West Bengal. It is the perfect place for celebration, competition, and leisure. We have something for you if you&apos;re just here to play football. Enter our well-kept football field or experience the excitement of a game on our floodlit field, which is ideal for both day and night games. Our turf is perfect for holding leagues and tournaments of all kinds because it has excellent facilities and lots of room. We cater to serious athletes to recreational players of all ability levels. Our arena provides a lively, dynamic setting that unites people via lovely game of football. Go for it. The lights are on. Now let&apos;s get started.
+                   Our cutting-edge sporting turf is in multiple locations in various states in India. It is the perfect place for celebration, competition, and leisure. We have something for you if you&apos;re just here to play cricket, football, baseball, volleyball and skating. Enter our well-kept field or experience the excitement of a game on our floodlit field, which is ideal for both day and night games. Our turf is perfect for holding leagues and tournaments of all kinds because it has excellent facilities and lots of room. We cater to serious athletes to recreational players of all ability levels. Our arena provides a lively, dynamic setting that unites people via the lovely games. Go for it. The lights are on. Now let&apos;s get started.
+
 
                 </p>
 

@@ -22,7 +22,7 @@ export default function TurfGallery() {
           {/* Top Right Large Image */}
           <div className="col-span-2 relative group overflow-hidden">
             <Image
-              src="/assets/img/score.jpg"
+              src="/assets/img/score.webp"
               alt="Football Action"
               width={600}
               height={400}
@@ -35,7 +35,7 @@ export default function TurfGallery() {
           {/* Bottom Two Small Images */}
           <div className="relative group overflow-hidden">
             <Image
-              src="/assets/img/wicket.jpg" 
+              src="/assets/img/playground.webp" 
               alt="Cricket Turf"
               width={300}
               height={200}
@@ -45,7 +45,7 @@ export default function TurfGallery() {
 
           <div className="relative group overflow-hidden">
             <Image
-              src="/assets/img/playground.jpg" 
+              src="/assets/img/wicket.webp" 
               alt="Evening Turf"
               width={300}
               height={200}

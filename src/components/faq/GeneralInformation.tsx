@@ -26,7 +26,7 @@ const accordionData: AccordionInfo[] = [
     id: "other",
     title: "Q3. What sports can I play at PSM Turf?",
     content:
-      "Currently, PSM Turf is solely for football. All pitches are appropriately maintained to give players the best surface to achieve smooth passes, clean tackles, and unforgettable goals.",
+      "Currently, PSM Turf is solely for cricket, football, baseball, volleyball and skating. All pitches are appropriately maintained to give players the best surface to achieve maximum recreation.",
   },
   {
     id: "four",
