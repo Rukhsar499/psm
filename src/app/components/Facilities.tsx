@@ -73,7 +73,7 @@ const facilities = [
 
 export default function Facilities() {
     return (
-        <section className="bg-[#F3F8F9] md:py-30 py-8 md:px-20">
+        <section className="bg-[#F3F8F9] md:py-30 py-8 md:px-20 px-3">
             <div className="mx-auto grid grid-cols-1 md:grid-cols-5 gap-10">
                 {facilities.map((item, i) => (
                     <motion.div
