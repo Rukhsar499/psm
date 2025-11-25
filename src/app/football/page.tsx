@@ -17,7 +17,7 @@ export default function Host() {
 </h2>
             </div>
             <div className="w-full lg:w-1/2 h-64">
-              <p className="text-[18px] text-[#656565]">The 5-a-side and 7-a-side premium football turfs at PSM Turf Kolkata are made for intense, fast-paced games. Our top-notch floodlights and grounds guarantee the ideal environment for practice, friendly games or competitive leagues. Our turf offers an unparalleled football experience, whether you're playing alone or with a team.
+              <p className="text-[18px] text-[#656565]">The 5-a-side and 7-a-side premium football turfs at PSM Turf Kolkata are made for intense, fast-paced games. Our top-notch floodlights and grounds guarantee the ideal environment for practice, friendly games or competitive leagues. Our turf offers an unparalleled football experience, whether you&apos;re playing alone or with a team.
 
 
               </p>
