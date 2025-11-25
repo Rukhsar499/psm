@@ -7,7 +7,7 @@ const OrchidArena: React.FC = () => {
     return (
         <section className="max-w-7xl mx-auto px-4 md:px-8 my-24 flex flex-col md:flex-row items-center gap-12">
             <div className="w-full md:w-1/2  flex-col gap-6">
-            <p className="text-[#0f0f0f] text-sm mb-4 triam font-bold">TRAIN LIKE AN EXPERT</p>
+            <p className="text-[#0f0f0f] text-sm mb-4 triam font-bold tracking-wide">TRAIN LIKE AN EXPERT</p>
                 <h2 className="text-3xl md:text-[55px] font-semibold mb-4">
                     Programs for Coaching <br />and Training
                     </h2>
