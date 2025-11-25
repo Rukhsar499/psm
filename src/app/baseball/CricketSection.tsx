@@ -9,37 +9,34 @@ export default function CricketSection() {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center mt-16">
           
           <div>
-            <Image src="/assets/img/cricket2.png" width={80} height={80} alt="pitch" className="mx-auto" />
-            <h4 className="mt-4 text-[26px] font-semibold">Beginner & Advanced Skating Zones</h4>
+            <Image src="/assets/img/baseball.png" width={80} height={80} alt="pitch" className="mx-auto" />
+            <h4 className="mt-4 text-[26px] font-semibold"> Competitive Play Areas</h4>
             <p className="text-gray-600 text-sm mt-2">
-              Separate spaces for learners and confident skaters, and specialised training for all age groups.
+             We cater to the needs of the complete beginner, regular player, and serious athlete.</p>
+          </div>
 
-
+          <div>
+            <Image src="/assets/img/high-five.png" width={80} height={80} alt="drain" className="mx-auto" />
+            <h4 className="mt-4 text-[26px] font-semibold">Friendly Environment</h4>
+            <p className="text-gray-600 text-sm mt-2">
+          Thoughtful planning ensures that you enjoy your training sessions, even after a light drizzle. 
             </p>
           </div>
 
           <div>
-            <Image src="/assets/img/cricket3.png" width={80} height={80} alt="drain" className="mx-auto" />
-            <h4 className="mt-4 text-[26px] font-semibold">All-Weather Usage</h4>
+            <Image src="/assets/img/stadium.png" width={90} height={90} alt="lighting" className="mx-auto" />
+            <h4 className="mt-4 text-[26px] font-semibold">Bright Floodlit Evenings</h4>
             <p className="text-gray-600 text-sm mt-2">
-            A well-thought-out environment ensures continuous practice, regardless of the weather conditions.
+             Strong and high-quality lighting makes you feel energetic, focused, and full of spirit.
 
-              </p>
-          </div>
-
-          <div>
-            <Image src="/assets/img/cricket4.png" width={80} height={80} alt="lighting" className="mx-auto" />
-            <h4 className="mt-4 text-[26px] font-semibold">Bright, Stadium-like Lighting</h4>
-            <p className="text-gray-600 text-sm mt-2">
-             Enjoy evening sessions with the same energy and excitement as a daytime skate.
 </p>
           </div>
 
           <div>
-            <Image src="/assets/img/cricket5.png" width={80} height={80} alt="medical" className="mx-auto" />
-            <h4 className="mt-4 text-[26px] font-semibold">On-Site Medical & First-Aid</h4>
+            <Image src="/assets/img/medical-box.png" width={80} height={80} alt="medical" className="mx-auto" />
+            <h4 className="mt-4 text-[26px] font-semibold">First Aid Support</h4>
             <p className="text-gray-600 text-sm mt-2">
-             Qualified staff and first-aid kits remain available during operational hours to reassure every skater.</p>
+            Trained staff and essential first-aid facilities are available during operating hours.</p>
           </div>
 
         </div>

@@ -9,12 +9,13 @@ const OrchidArena: React.FC = () => {
     return (
         <section className="max-w-7xl mx-auto px-4 md:px-8 my-24 flex flex-col md:flex-row items-center gap-12">
             <div className="w-full md:w-1/2  flex-col gap-6">
-            <p className="text-[#0f0f0f] text-sm mb-4 triam font-bold tracking-wide">TRAIN LIKE AN EXPERT</p>
+            <p className="text-[#0f0f0f] text-sm mb-4 triam font-bold tracking-wide">WELCOME </p>
                 <h2 className="text-3xl md:text-[55px] font-semibold mb-4">
-                    Programs for Coaching <br />and Training
+                    Step In, Suit Up, and <br /> Let the Game Begin
                     </h2>
                 <p className="text-[18px] text-[#656565]  mb-10">
-                    Players of all ages and ability levels can enhance their technique and game strategy with the help of our professional coaching programs. Personalised training sessions will improve your performance on the pitch, regardless of your skill level.
+                   Whether you&aop;re a curious beginner, a dedicated athlete, a supportive parent, or a team leader looking for the right field, this is the place for everyone. At PSM Services, we believe in building a community connected by passion, respect, and joy for the sport.
+
 
                 </p>
                
@@ -27,7 +28,7 @@ const OrchidArena: React.FC = () => {
             </div>
             <div className=" w-full md:w-1/2">
                 <Image
-                    src="/assets/img/host-arena.jpg"
+                    src="/assets/img/host-base-img.webp"
                     alt="A soccer arena"
                     width={500}
                     height={300}

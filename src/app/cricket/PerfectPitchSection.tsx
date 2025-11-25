@@ -6,10 +6,10 @@ import Link from "next/link";
 export default function PerfectPitchSection() {
     return (
         <section className="w-full bg-[#F4F8F9] py-16">
-            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center px-6">
+            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center px-6">
 
                 {/* Left Image */}
-                <div className="relative w-full h-[500px]">
+                <div className="relative w-full h-[600px]">
                     <Image
                         src="/assets/img/pitch-img.jpg" // change your image path here
                         alt="Cricket Player"
