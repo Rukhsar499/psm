@@ -15,6 +15,10 @@ interface FormData {
   promo_code: string;
   discount_amount: number;
 }
+interface State {
+  state_name: string;
+}
+
 interface Sport {
   mcategory_id: number;
   mcategory_detail: string; // <-- Yeh visible text hoga dropdown me
@@ -46,6 +50,8 @@ export default function ContactForm() {
     discount_amount: 0.00
   });
 
+  const [states, setStates] = useState<State[]>([]);
+  const [statesLoading, setStatesLoading] = useState(false);
   const [sports, setSports] = useState<Sport[]>([]);
   const [sportsLoading, setSportsLoading] = useState(false);
   const [locations, setLocations] = useState<Location[]>([]);
@@ -62,19 +68,34 @@ export default function ContactForm() {
   };
 
   useEffect(() => {
-  setSportsLoading(true);
+    setStatesLoading(true);
 
-  fetch("/api/sports")
-    .then((res) => res.json())
-    .then((data) => {
-      console.log("Sports Response:", data);
-      if (data.status && Array.isArray(data.data)) {
-        setSports(data.data);
-      }
-    })
-    .catch(console.error)
-    .finally(() => setSportsLoading(false));
-}, []);
+    fetch("/api/state") // <-- create your api proxy or direct URL
+      .then(res => res.json())
+      .then(data => {
+        if (data.status && Array.isArray(data.data)) {
+          setStates(data.data);
+        }
+      })
+      .catch(console.error)
+      .finally(() => setStatesLoading(false));
+  }, []);
+
+
+  useEffect(() => {
+    setSportsLoading(true);
+
+    fetch("/api/sports")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Sports Response:", data);
+        if (data.status && Array.isArray(data.data)) {
+          setSports(data.data);
+        }
+      })
+      .catch(console.error)
+      .finally(() => setSportsLoading(false));
+  }, []);
 
   // Fetch locations
   useEffect(() => {
@@ -211,6 +232,23 @@ export default function ContactForm() {
             {sports.map((sport) => (
               <option key={sport.mcategory_id} value={sport.mcategory_id}>
                 {sport.mcategory_detail}   {/* Yeh text show hoga */}
+              </option>
+            ))}
+          </select>
+
+          <select
+            name="state"
+            onChange={handleChange}
+            className="border-b border-gray-400 p-3 w-full mb-4 bg-transparent focus:border-black focus:outline-none"
+            required
+          >
+            <option value="">
+              {statesLoading ? "Loading States..." : "Select State"}
+            </option>
+
+            {states.map((state, index) => (
+              <option key={index} value={state.state_name}>
+                {state.state_name}
               </option>
             ))}
           </select>
