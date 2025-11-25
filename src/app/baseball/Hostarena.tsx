@@ -7,8 +7,8 @@ import Link from "next/link";
 
 const OrchidArena: React.FC = () => {
     return (
-        <section className="max-w-7xl mx-auto px-4 md:px-8 my-24 flex flex-col md:flex-row items-center gap-12">
-            <div className="w-full md:w-1/2  flex-col gap-6">
+        <section className="max-w-7xl mx-auto px-4 md:px-8 md:my-24 my-10 flex flex-col md:flex-row items-center gap-12">
+            <div className="w-full md:w-1/2  flex-col gap-6 order-2 md:order-1">
             <p className="text-[#0f0f0f] text-sm mb-4 triam font-bold tracking-wide">WELCOME </p>
                 <h2 className="text-3xl md:text-[55px] font-semibold mb-4">
                     Step In, Suit Up, and <br /> Let the Game Begin
@@ -26,7 +26,7 @@ const OrchidArena: React.FC = () => {
                 BOOK YOUR EVENT
               </Link>
             </div>
-            <div className=" w-full md:w-1/2">
+            <div className=" w-full md:w-1/2 order-1 md:order-2">
                 <Image
                     src="/assets/img/host-base-img.webp"
                     alt="A soccer arena"

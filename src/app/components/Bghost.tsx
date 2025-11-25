@@ -8,12 +8,12 @@ export default function VideoSection() {
 
   return (
     <section
-      className="relative w-full h-screen overflow-hidden flex items-center justify-center"
+      className="relative w-full md:h-screen h-[600px] overflow-hidden flex items-center justify-center"
       style={{ backgroundImage: "url('/assets/img/football-banners.webp')" }}
     >
       {/* Overlay dark effect */}
       <div className="absolute inset-0 bg-black/50"></div>
-        <div className="absolute bottom-40 left-25 leading-tight tracking-tight z-10 flex flex-col items-start justify-center  text-left text-white px-4">
+        <div className="absolute md:bottom-40 md:left-25 bottom-20 left-10 leading-tight tracking-tight z-10 flex flex-col items-start justify-center  text-left text-white px-4">
                 <motion.h2
                     initial={{ opacity: 0, y: 50 }}
                     animate={{ opacity: 1, y: 0 }}
