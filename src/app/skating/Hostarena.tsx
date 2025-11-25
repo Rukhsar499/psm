@@ -27,7 +27,7 @@ const OrchidArena: React.FC = () => {
             </div>
             <div className=" w-full md:w-1/2">
                 <Image
-                    src="/assets/img/host-arena.jpg"
+                    src="/assets/img/last-skating.webp"
                     alt="A soccer arena"
                     width={500}
                     height={300}
