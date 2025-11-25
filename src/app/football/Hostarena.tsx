@@ -11,11 +11,11 @@ const OrchidArena: React.FC = () => {
             <div className="w-full md:w-1/2  flex-col gap-6">
             <p className="text-[#0f0f0f] text-sm mb-4 triam font-bold tracking-wide">WELCOME</p>
                 <h2 className="text-3xl md:text-[55px] font-semibold mb-4">
-                    Step In, Team Up, and Play Your Heart Out
+                    Come On, Get Started, and You&apos;re All Welcome
 
                     </h2>
                 <p className="text-[18px] text-[#656565]  mb-10">
-                    Whether you&aop;re a curious beginner, an enthusiastic athlete, or someone looking to reconnect with the sport, our doors are open. At PSM Turf, volleyball becomes more than a match—it becomes a memory, a lesson, and a joyful experience shared with the community.
+                   We welcome everyone, whether you are an enthusiastic player, an inquisitive novice, or a helpful supporter. We think that through sports, we can create a community that is welcoming, vibrant, and passionate.
 
 
                 </p>
@@ -29,7 +29,7 @@ const OrchidArena: React.FC = () => {
             </div>
             <div className=" w-full md:w-1/2">
                 <Image
-                    src="/assets/img/host-volley-img.webp"
+                    src="/assets/img/host-football.webp"
                     alt="A soccer arena"
                     width={500}
                     height={300}

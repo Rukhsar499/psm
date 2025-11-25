@@ -9,7 +9,7 @@ export default function VideoSection() {
   return (
     <section
       className="relative w-full h-screen overflow-hidden flex items-center justify-center"
-      style={{ backgroundImage: "url('/assets/img/b-host.jpg')" }}
+      style={{ backgroundImage: "url('/assets/img/football-banners.webp')" }}
     >
       {/* Overlay dark effect */}
       <div className="absolute inset-0 bg-black/50"></div>
@@ -20,7 +20,8 @@ export default function VideoSection() {
                     transition={{ duration: 1, ease: "easeOut" }}
                     className="text-4xl md:text-[120px] font-semibold mb-0"
                 >
-                    Perfect Football Turf For Your
+                    Your Football Field <br /> Is Here
+
                 </motion.h2>
 
                 <motion.h2
@@ -29,7 +30,7 @@ export default function VideoSection() {
                     transition={{ duration: 1, delay: 0.5 }}
                     className="text-4xl md:text-[120px] font-semibold mb-0"
                 >
-                    Tournament
+                   
                 </motion.h2>
             </div>
    </section>
