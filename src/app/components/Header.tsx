@@ -47,7 +47,7 @@ export default function Header() {
                   <Link href="/football" className="block px-4 py-2 hover:bg-gray-100">Football Turf</Link>
                   <Link href="/cricket" className="block px-4 py-2 hover:bg-gray-100">Cricket Turf</Link>
                   <Link href="/baseball" className="block px-4 py-2 hover:bg-gray-100">Baseball</Link>
-                  <Link href="/volley" className="block px-4 py-2 hover:bg-gray-100">Volley Ball</Link>
+                  <Link href="/volleyball" className="block px-4 py-2 hover:bg-gray-100">Volley Ball</Link>
                   <Link href="/skating" className="block px-4 py-2 hover:bg-gray-100">Skating</Link>
                 </div>
               </div>
@@ -112,7 +112,7 @@ export default function Header() {
               <Link href="/football" className="block px-4 py-2 hover:bg-gray-100">Football Turf</Link>
                   <Link href="/cricket" className="block px-4 py-2 hover:bg-gray-100">Cricket Turf</Link>
                   <Link href="/baseball" className="block px-4 py-2 hover:bg-gray-100">Baseball</Link>
-                  <Link href="/volley" className="block px-4 py-2 hover:bg-gray-100">Volley Ball</Link>
+                  <Link href="/volleyball" className="block px-4 py-2 hover:bg-gray-100">Volley Ball</Link>
                   <Link href="/skating" className="block px-4 py-2 hover:bg-gray-100">Skating</Link>
             </div>
           )}

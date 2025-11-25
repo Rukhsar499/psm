@@ -1,0 +1,41 @@
+'use client';
+
+import Image from "next/image";
+import React from "react";
+import Link from "next/link";
+
+
+const OrchidArena: React.FC = () => {
+    return (
+        <section className="max-w-7xl mx-auto px-4 md:px-8 my-24 flex flex-col md:flex-row items-center gap-12">
+            <div className="w-full md:w-1/2  flex-col gap-6">
+            <p className="text-[#0f0f0f] text-sm mb-4 triam font-bold tracking-wide">TRAIN LIKE AN EXPERT</p>
+                <h2 className="text-3xl md:text-[55px] font-semibold mb-4">
+                    Programs for Coaching <br />and Training
+                    </h2>
+                <p className="text-[18px] text-[#656565]  mb-10">
+                    Players of all ages and ability levels can enhance their technique and game strategy with the help of our professional coaching programs. Personalised training sessions will improve your performance on the pitch, regardless of your skill level.
+
+                </p>
+               
+                 <Link
+                href="/booking"
+                className="bg-[#5ea500] text-white px-5 py-5 font-semibold hover:bg-lime-600 transition"
+              >
+                BOOK YOUR EVENT
+              </Link>
+            </div>
+            <div className=" w-full md:w-1/2">
+                <Image
+                    src="/assets/img/host-arena.jpg"
+                    alt="A soccer arena"
+                    width={500}
+                    height={300}
+                />
+
+            </div>
+        </section>
+    );
+};
+
+export default OrchidArena;
