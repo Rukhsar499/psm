@@ -45,8 +45,10 @@ export default function Header() {
 
                 <div className="absolute left-0 top-full mt-2 bg-white text-black rounded shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 min-w-[180px]">
                   <Link href="/football" className="block px-4 py-2 hover:bg-gray-100">Football Turf</Link>
-                  <Link href="/cricket" className="block px-4 py-2 hover:bg-gray-100">Cricket Pitch</Link>
-                  <Link href="/activities" className="block px-4 py-2 hover:bg-gray-100">Kids Activities</Link>
+                  <Link href="/cricket" className="block px-4 py-2 hover:bg-gray-100">Cricket Turf</Link>
+                  <Link href="/baseball" className="block px-4 py-2 hover:bg-gray-100">Baseball</Link>
+                  <Link href="/volley" className="block px-4 py-2 hover:bg-gray-100">Volley Ball</Link>
+                  <Link href="/skating" className="block px-4 py-2 hover:bg-gray-100">Skating</Link>
                 </div>
               </div>
 
@@ -107,9 +109,11 @@ export default function Header() {
 
           {openDropdown && (
             <div className="ml-4 flex flex-col gap-3">
-              <Link href="/football" onClick={() => setOpenMenu(false)}>Football Turf</Link>
-              <Link href="/cricket" onClick={() => setOpenMenu(false)}>Cricket Pitch</Link>
-              <Link href="/activities" onClick={() => setOpenMenu(false)}>Kids Activities</Link>
+              <Link href="/football" className="block px-4 py-2 hover:bg-gray-100">Football Turf</Link>
+                  <Link href="/cricket" className="block px-4 py-2 hover:bg-gray-100">Cricket Turf</Link>
+                  <Link href="/baseball" className="block px-4 py-2 hover:bg-gray-100">Baseball</Link>
+                  <Link href="/volley" className="block px-4 py-2 hover:bg-gray-100">Volley Ball</Link>
+                  <Link href="/skating" className="block px-4 py-2 hover:bg-gray-100">Skating</Link>
             </div>
           )}
 
