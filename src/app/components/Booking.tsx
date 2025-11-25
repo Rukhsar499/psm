@@ -6,6 +6,7 @@ interface FormData {
   full_name: string;
   email_id: string;
   contact_no: string;
+  sport_id: string;
   location_id: string;
   booking_date: string;
   bookedslotrate_ids: string[];
@@ -13,6 +14,10 @@ interface FormData {
   total_amount: number;
   promo_code: string;
   discount_amount: number;
+}
+interface Sport {
+  mcategory_id: number;
+  mcategory_detail: string; // <-- Yeh visible text hoga dropdown me
 }
 
 interface Location {
@@ -32,6 +37,7 @@ export default function ContactForm() {
     email_id: "",
     contact_no: "",
     location_id: "",
+    sport_id: "",
     booking_date: "",
     bookedslotrate_ids: [],
     selectedSlots: [],
@@ -40,6 +46,8 @@ export default function ContactForm() {
     discount_amount: 0.00
   });
 
+  const [sports, setSports] = useState<Sport[]>([]);
+  const [sportsLoading, setSportsLoading] = useState(false);
   const [locations, setLocations] = useState<Location[]>([]);
   const [loading, setLoading] = useState(false);
   const [slots, setSlots] = useState<Slot[]>([]);
@@ -52,6 +60,21 @@ export default function ContactForm() {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
+
+  useEffect(() => {
+  setSportsLoading(true);
+
+  fetch("/api/sports")
+    .then((res) => res.json())
+    .then((data) => {
+      console.log("Sports Response:", data);
+      if (data.status && Array.isArray(data.data)) {
+        setSports(data.data);
+      }
+    })
+    .catch(console.error)
+    .finally(() => setSportsLoading(false));
+}, []);
 
   // Fetch locations
   useEffect(() => {
@@ -177,8 +200,23 @@ export default function ContactForm() {
               title="Phone number must start with 6,7,8,9 and be 10 digits"
             />
           </div>
+          <select
+            name="sport_id"
+            value={formData.sport_id}
+            onChange={handleChange}
+            className="border-b border-gray-400 p-3 w-full mb-4 bg-transparent focus:border-black focus:outline-none"
+            required
+          >
+            <option value="">{sportsLoading ? "Loading Sports..." : "Select Sport"}</option>
+            {sports.map((sport) => (
+              <option key={sport.mcategory_id} value={sport.mcategory_id}>
+                {sport.mcategory_detail}   {/* Yeh text show hoga */}
+              </option>
+            ))}
+          </select>
 
           {/* Location */}
+
           <select
             name="location_id"
             value={formData.location_id}
@@ -224,8 +262,8 @@ export default function ContactForm() {
                     <tr
                       key={index}
                       className={`border-t ${formData.selectedSlots?.some(s => s.slot_rate_id === slot.slot_rate_id)
-                          ? "bg-green-100"
-                          : "bg-white"
+                        ? "bg-green-100"
+                        : "bg-white"
                         }`}
                     >
                       <td className="py-3 px-4">{slot.slot_name}</td>
