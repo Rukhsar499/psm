@@ -20,7 +20,8 @@ export default function VideoSection() {
                     transition={{ duration: 1, ease: "easeOut" }}
                     className="text-4xl md:text-[120px] font-semibold mb-0"
                 >
-                    Perfect Football Turf For Your
+                    The Perfect Place for Cricket
+
                 </motion.h2>
 
                 <motion.h2
