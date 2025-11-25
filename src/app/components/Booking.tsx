@@ -7,6 +7,7 @@ interface FormData {
   email_id: string;
   contact_no: string;
   sport_id: string;
+  state: string;
   location_id: string;
   booking_date: string;
   bookedslotrate_ids: string[];
@@ -42,6 +43,7 @@ export default function ContactForm() {
     contact_no: "",
     location_id: "",
     sport_id: "",
+    state: "",
     booking_date: "",
     bookedslotrate_ids: [],
     selectedSlots: [],
@@ -50,6 +52,8 @@ export default function ContactForm() {
     discount_amount: 0.00
   });
 
+  const [cities, setCities] = useState<any[]>([]);
+  const [citiesLoading, setCitiesLoading] = useState(false);
   const [states, setStates] = useState<State[]>([]);
   const [statesLoading, setStatesLoading] = useState(false);
   const [sports, setSports] = useState<Sport[]>([]);
@@ -66,6 +70,24 @@ export default function ContactForm() {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
+
+  useEffect(() => {
+    if (!formData.state) return;
+
+    setCitiesLoading(true);
+
+    fetch(`/api/cities?state=${formData.state}&loc_id=1`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status && Array.isArray(data.data)) {
+          setCities(data.data);
+        } else {
+          setCities([]);
+        }
+      })
+      .catch(() => setCities([]))
+      .finally(() => setCitiesLoading(false));
+  }, [formData.state]);
 
   useEffect(() => {
     setStatesLoading(true);
@@ -249,6 +271,23 @@ export default function ContactForm() {
             {states.map((state, index) => (
               <option key={index} value={state.state_name}>
                 {state.state_name}
+              </option>
+            ))}
+          </select>
+
+          <select
+            name="city"
+            onChange={handleChange}
+            className="border-b border-gray-400 p-3 w-full mb-4 bg-transparent focus:border-black focus:outline-none"
+            required
+          >
+            <option value="">
+              {citiesLoading ? "Loading cities..." : "Select City"}
+            </option>
+
+            {cities.map((city) => (
+              <option key={city.category_id} value={city.category_id}>
+                {city.category_detail}
               </option>
             ))}
           </select>
