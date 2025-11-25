@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function CricketSection() {
   return (
-    <section className="">
+    <section className="mb-30">
       <div className="mx-auto max-w-7xl px-4 md:px-0">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center mt-16">
           

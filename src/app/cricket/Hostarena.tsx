@@ -1,6 +1,8 @@
 'use client';
+
 import Image from "next/image";
 import React from "react";
+import Link from "next/link";
 
 
 const OrchidArena: React.FC = () => {
@@ -11,17 +13,17 @@ const OrchidArena: React.FC = () => {
                 <h2 className="text-3xl md:text-[55px] font-semibold mb-4">
                     Programs for Coaching <br />and Training
                     </h2>
-                <p className="text-[18px] text-[#656565]">
+                <p className="text-[18px] text-[#656565]  mb-10">
                     Players of all ages and ability levels can enhance their technique and game strategy with the help of our professional coaching programs. Personalised training sessions will improve your performance on the pitch, regardless of your skill level.
 
                 </p>
                
-                <button
-                    type="submit"
-                    className="font-['DM_Sans'] flex items-center mt-4 justify-center gap-2 px-10 py-3 bg-[#2eac6d] text-white font-semibold  hover:bg-green-700 transition w-fit"
-                >
-                    <span>Book Your Event</span>
-                </button>
+                 <Link
+                href="/booking"
+                className="bg-lime-500 text-white px-5 py-3 font-semibold hover:bg-lime-600 transition"
+              >
+                BOOK YOUR EVENT
+              </Link>
             </div>
             <div className=" w-full md:w-1/2">
                 <Image
