@@ -13,15 +13,14 @@ export async function GET(req: Request) {
     });
   }
 
-  // Convert date from YYYY-MM-DD to DD-MM-YYYY
-  const [year, month, day] = date.split('-'); 
-  const formattedDate = `${day}-${month}-${year}`; // 'DD-MM-YYYY'
+  const formattedDate = date; // already YYYY-MM-DD
 
   console.log("Fetching slots with:", subcatid, formattedDate);
 
   try {
     const res = await fetch(
-      `https://psmapi.thenoncoders.in/api/v1/get_availableslots?subcatid=${encodeURIComponent(subcatid)}&bdate=${encodeURIComponent(formattedDate)}`,
+     `https://psmapi.thenoncoders.in/api/v1/get_availableslots?subcatid=2&bdate=2025-11-28`
+,
 
       {
         headers: {

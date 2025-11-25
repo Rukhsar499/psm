@@ -8,6 +8,7 @@ interface FormData {
   contact_no: string;
   sport_id: string;
   state: string;
+  city: string;
   location_id: string;
   booking_date: string;
   bookedslotrate_ids: string[];
@@ -44,6 +45,7 @@ export default function ContactForm() {
     location_id: "",
     sport_id: "",
     state: "",
+    city: "",
     booking_date: "",
     bookedslotrate_ids: [],
     selectedSlots: [],
@@ -121,15 +123,23 @@ export default function ContactForm() {
 
   // Fetch locations
   useEffect(() => {
+    if (!formData.city) return;
+
     setLoading(true);
-    fetch("/api/locations")
+
+    fetch(`/api/locations?city=${formData.city}`)
       .then((res) => res.json())
       .then((data) => {
-        if (data.status) setLocations(data.data);
+        if (data.status && Array.isArray(data.data)) {
+          setLocations(data.data);
+        } else {
+          setLocations([]);
+        }
       })
-      .catch(console.error)
+      .catch(() => setLocations([]))
       .finally(() => setLoading(false));
-  }, []);
+  }, [formData.city]);
+
 
   // Fetch slots
   useEffect(() => {
@@ -139,19 +149,19 @@ export default function ContactForm() {
     }
 
     setSlotsLoading(true);
-    const selectedLoc = locations.find(
-      (loc) => String(loc.subcategory_id) === formData.location_id
-    );
-    const subcatid = selectedLoc?.subcategory_id;
 
+    const selectedLoc = locations.find(
+      (loc) => loc.subcategory_id == Number(formData.location_id)
+    );
+
+    const subcatid = selectedLoc?.subcategory_id;
     if (!subcatid) {
       setSlotsLoading(false);
       setSlots([]);
       return;
     }
 
-    const [year, month, day] = formData.booking_date.split("-");
-    const formattedDate = `${day}-${month}-${year}`;
+    const formattedDate = formData.booking_date; // FIXED
 
     fetch(`/api/slots?subcatid=${subcatid}&date=${formattedDate}`)
       .then((res) => res.json())
@@ -277,17 +287,18 @@ export default function ContactForm() {
 
           <select
             name="city"
+            value={formData.city}
             onChange={handleChange}
             className="border-b border-gray-400 p-3 w-full mb-4 bg-transparent focus:border-black focus:outline-none"
             required
           >
             <option value="">
-              {citiesLoading ? "Loading cities..." : "Select City"}
+              {citiesLoading ? "Loading Cities..." : "Select City"}
             </option>
 
             {cities.map((city) => (
-              <option key={city.category_id} value={city.category_id}>
-                {city.category_detail}
+              <option key={city.city_id} value={city.city_id}>
+                {city.city_name}
               </option>
             ))}
           </select>
@@ -302,6 +313,7 @@ export default function ContactForm() {
             required
           >
             <option value="">{loading ? "Loading locations..." : "Select Location"}</option>
+
             {locations.map((loc) => (
               <option key={loc.subcategory_id} value={loc.subcategory_id}>
                 {loc.subcategory_detail}
