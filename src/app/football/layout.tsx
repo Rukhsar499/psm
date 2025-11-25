@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
- title: "Host An Event - Narayana",
-  description: "Sports Narayana Website",
+ title: "PSM Football – Your Space to Play, Grow & Feel the Game",
+  description: "Enjoy energetic football matches on safe, well-lit fields. Play, practice, and feel the spirit of the sport with every pass and every goal.",
 };
 
 

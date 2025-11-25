@@ -20,7 +20,8 @@ export default function VideoSection() {
                     transition={{ duration: 1, ease: "easeOut" }}
                     className="text-4xl md:text-[120px] font-semibold mb-0"
                 >
-                    The Perfect Place for Cricket
+                    Your Skating Arena Is Here
+
 
                 </motion.h2>
 
@@ -30,7 +31,7 @@ export default function VideoSection() {
                     transition={{ duration: 1, delay: 0.5 }}
                     className="text-4xl md:text-[120px] font-semibold mb-0"
                 >
-                    Tournament
+                   
                 </motion.h2>
             </div>
    </section>

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
- title: "Host An Event - Narayana",
-  description: "Sports Narayana Website",
+ title: "PSM Skating – Glide, Balance & Discover Pure Freedom",
+  description: "Learn, practice, and enjoy skating on smooth, safe surfaces. Perfect for beginners and learners who want confidence and joy on wheels.",
 };
 
 

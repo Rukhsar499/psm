@@ -10,33 +10,36 @@ export default function CricketSection() {
           
           <div>
             <Image src="/assets/img/cricket2.png" width={80} height={80} alt="pitch" className="mx-auto" />
-            <h4 className="mt-4 text-[26px] font-semibold">All-Format Prepared</h4>
+            <h4 className="mt-4 text-[26px] font-semibold">Beginner & Advanced Skating Zones</h4>
             <p className="text-gray-600 text-sm mt-2">
-              T20, One-Day, and Test-style formats with appropriate field dimensions are supported.
+              Separate spaces for learners and confident skaters, and specialised training for all age groups.
+
 
             </p>
           </div>
 
           <div>
             <Image src="/assets/img/cricket3.png" width={80} height={80} alt="drain" className="mx-auto" />
-            <h4 className="mt-4 text-[26px] font-semibold">Pavilion with Chairs</h4>
+            <h4 className="mt-4 text-[26px] font-semibold">All-Weather Usage</h4>
             <p className="text-gray-600 text-sm mt-2">
-             Seating and covered rest facilities for both players and spectators.
+            A well-thought-out environment ensures continuous practice, regardless of the weather conditions.
+
               </p>
           </div>
 
           <div>
             <Image src="/assets/img/cricket4.png" width={80} height={80} alt="lighting" className="mx-auto" />
-            <h4 className="mt-4 text-[26px] font-semibold">LED Floodlights</h4>
+            <h4 className="mt-4 text-[26px] font-semibold">Bright, Stadium-like Lighting</h4>
             <p className="text-gray-600 text-sm mt-2">
-              Enjoy consistent, shadow-free stadium lighting during day-night games.</p>
+             Enjoy evening sessions with the same energy and excitement as a daytime skate.
+</p>
           </div>
 
           <div>
             <Image src="/assets/img/cricket5.png" width={80} height={80} alt="medical" className="mx-auto" />
-            <h4 className="mt-4 text-[26px] font-semibold">Available Practice Nets</h4>
+            <h4 className="mt-4 text-[26px] font-semibold">On-Site Medical & First-Aid</h4>
             <p className="text-gray-600 text-sm mt-2">
-             Specific practice nets for targeted training exercises and warm-up sessions.</p>
+             Qualified staff and first-aid kits remain available during operational hours to reassure every skater.</p>
           </div>
 
         </div>
