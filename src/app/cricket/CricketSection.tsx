@@ -18,7 +18,7 @@ export default function CricketSection() {
           </div>
 
           <div>
-            <Image src="/assets/img/cricket3.png" width={100} height={100} alt="drain" className="mx-auto" />
+            <Image src="/assets/img/cricket3.png" width={120} height={120} alt="drain" className="mx-auto" />
             <h4 className="mt-4 text-[26px] font-semibold">Pavilion with Chairs</h4>
             <p className="text-gray-600 text-sm mt-2">
              Seating and covered rest facilities for both players and spectators.
@@ -33,7 +33,7 @@ export default function CricketSection() {
           </div>
 
           <div>
-            <Image src="/assets/img/cricket5.png" width={80} height={80} alt="medical" className="mx-auto" />
+            <Image src="/assets/img/cricket5.png" width={90} height={90} alt="medical" className="mx-auto" />
             <h4 className="mt-4 text-[26px] font-semibold">Available Practice Nets</h4>
             <p className="text-gray-600 text-sm mt-2">
              Specific practice nets for targeted training exercises and warm-up sessions.</p>
