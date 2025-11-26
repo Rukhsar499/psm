@@ -5,8 +5,11 @@ import Header from "./Header";
 import Footer from "./Footer";
 
 export default function LayoutWrapper({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname() || "/"; // fallback to "/" if undefined
-  const hideHeaderFooter = pathname === "/thank-you";
+  const pathname = usePathname() || "/";
+
+  const hideHeaderFooter =
+    pathname === "/thank-you" ||
+    pathname === "/invoice";
 
   return (
     <>
