@@ -1,14 +1,15 @@
 "use client";
 import { motion } from "framer-motion";
-
+import Image from "next/image"
 
 
 export default function VideoSection() {
  
 
   return (
+    <>
     <section
-      className="relative w-full md:h-screen h-[600px] overflow-hidden flex items-center justify-center"
+      className="relative w-full md:h-screen h-[600px] overflow-hidden md:block hidden  items-center justify-center"
       style={{ backgroundImage: "url('/assets/img/football-banners.webp')" }}
     >
       {/* Overlay dark effect */}
@@ -34,5 +35,14 @@ export default function VideoSection() {
                 </motion.h2>
             </div>
    </section>
+    <section className="md:hidden block">
+              <Image
+                src="/assets/img/football-mobile.png"
+                alt="baseball turf"
+                width="430"
+                height="600"
+                />
+            </section>
+            </>
   );
 }
