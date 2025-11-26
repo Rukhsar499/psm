@@ -3,29 +3,53 @@ import React, { useEffect } from "react";
 import Image from "next/image";
 
 export default function Invoice() {
+  interface OrderMaster {
+  Customer_Name: string;
+  Customer_MobileNo: string;
+  Customer_Emailid: string;
+  Location: string;
+  order_id: string;
+  slot_name: string;
+}
+
+interface OrderDetail {
+  slot_name: string;
+  booked_slot_rate: number;
+  booking_date: string;
+}
+
+interface InvoiceData {
+  status: boolean;
+  ordermaster: OrderMaster[];
+  orderdetail: OrderDetail[];
+}
+const [orderData, setOrderData] = React.useState<InvoiceData | null>(null);
 
   useEffect(() => {
-    const tbody = document.getElementById("itemsBody") as HTMLTableSectionElement;
-    if (!tbody) return;
+  if (!orderData) return;
 
-    let subtotal = 0;
-    for (let r = 0; r < tbody.rows.length; r++) {
-      const amtText = tbody.rows[r].cells[4].innerText.replace(/[^0-9.-]+/g, "");
-      const val = parseFloat(amtText) || 0;
-      subtotal += val;
-    }
+  const tbody = document.getElementById("itemsBody") as HTMLTableSectionElement;
+  if (!tbody) return;
 
-    const discount = 0;
-    const gst = +(subtotal * 0.18).toFixed(2);
-    const total = +(subtotal - discount + gst).toFixed(2);
+  let subtotal = 0;
+  for (let r = 0; r < tbody.rows.length; r++) {
+    const amtText = tbody.rows[r].cells[4].innerText.replace(/[^0-9.-]+/g, "");
+    const val = parseFloat(amtText) || 0;
+    subtotal += val;
+  }
 
-    document.getElementById("subtotal")!.innerText = "₹" + subtotal.toFixed(2);
-    document.getElementById("discount")!.innerText = "-₹" + discount.toFixed(2);
-    document.getElementById("gst")!.innerText = "₹" + gst.toFixed(2);
-    document.getElementById("totalPay")!.innerText = "₹" + total.toFixed(2);
-  }, []);
+  const discount = 0;
+  const gst = +(subtotal * 0.18).toFixed(2);
+  const total = +(subtotal - discount + gst).toFixed(2);
 
-  const [orderData, setOrderData] = React.useState<any>(null);
+  document.getElementById("subtotal")!.innerText = "₹" + subtotal.toFixed(2);
+  document.getElementById("discount")!.innerText = "-₹" + discount.toFixed(2);
+  document.getElementById("gst")!.innerText = "₹" + gst.toFixed(2);
+  document.getElementById("totalPay")!.innerText = "₹" + total.toFixed(2);
+
+}, [orderData]);
+
+  
   useEffect(() => {
     async function fetchData() {
       const res = await fetch(`/api/invoice`);
@@ -143,9 +167,7 @@ export default function Invoice() {
 
         <div className="summary">
           <div className="totals">
-            <div className="row"><div>Subtotal</div><div id="subtotal">₹0.00</div></div>
             <div className="row"><div>Discount</div><div id="discount">-₹0.00</div></div>
-            <div className="row"><div>GST (18%)</div><div id="gst">₹0.00</div></div>
             <div className="row total"><div>Total Payable</div><div id="totalPay">₹0.00</div></div>
           </div>
         </div>
