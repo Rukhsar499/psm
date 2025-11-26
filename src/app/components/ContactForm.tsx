@@ -1,21 +1,35 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
-
-import {  useEffect } from "react";
 
 interface FormData {
   full_name: string;
   email_id: string;
   contact_no: string;
+  sport_id: string;
+  state: string;
+  city: string;
   location_id: string;
   booking_date: string;
   bookedslotrate_ids: string[];
   selectedSlots: Slot[];
-  total_amount:number;
-  promo_code:string;
-  discount_amount:number;
+  total_amount: number;
+  promo_code: string;
+  discount_amount: number;
+}
+interface State {
+  state_name: string;
+}
+
+interface City {
+  city_id: number;
+  city_name: string;
+}
+
+interface Sport {
+  mcategory_id: number;
+  mcategory_detail: string; // <-- Yeh visible text hoga dropdown me
 }
 
 interface Location {
@@ -35,14 +49,23 @@ export default function ContactForm() {
     email_id: "",
     contact_no: "",
     location_id: "",
+    sport_id: "",
+    state: "",
+    city: "",
     booking_date: "",
     bookedslotrate_ids: [],
     selectedSlots: [],
-    total_amount:0.00,
-    promo_code:"",
-    discount_amount:0.00
+    total_amount: 0.00,
+    promo_code: "",
+    discount_amount: 0.00
   });
 
+  const [cities, setCities] = useState<City[]>([]);
+  const [citiesLoading, setCitiesLoading] = useState<boolean>(false);
+  const [states, setStates] = useState<State[]>([]);
+  const [statesLoading, setStatesLoading] = useState(false);
+  const [sports, setSports] = useState<Sport[]>([]);
+  const [sportsLoading, setSportsLoading] = useState(false);
   const [locations, setLocations] = useState<Location[]>([]);
   const [loading, setLoading] = useState(false);
   const [slots, setSlots] = useState<Slot[]>([]);
@@ -56,17 +79,73 @@ export default function ContactForm() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Fetch locations
   useEffect(() => {
-    setLoading(true);
-    fetch("/api/locations")
+    if (!formData.state) return;
+
+    setCitiesLoading(true);
+
+    fetch(`/api/cities?state=${formData.state}&loc_id=1`)
       .then((res) => res.json())
       .then((data) => {
-        if (data.status) setLocations(data.data);
+        if (data.status && Array.isArray(data.data)) {
+          setCities(data.data);
+        } else {
+          setCities([]);
+        }
+      })
+      .catch(() => setCities([]))
+      .finally(() => setCitiesLoading(false));
+  }, [formData.state]);
+
+  useEffect(() => {
+    setStatesLoading(true);
+
+    fetch("/api/state") // <-- create your api proxy or direct URL
+      .then(res => res.json())
+      .then(data => {
+        if (data.status && Array.isArray(data.data)) {
+          setStates(data.data);
+        }
       })
       .catch(console.error)
-      .finally(() => setLoading(false));
+      .finally(() => setStatesLoading(false));
   }, []);
+
+
+  useEffect(() => {
+    setSportsLoading(true);
+
+    fetch("/api/sports")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Sports Response:", data);
+        if (data.status && Array.isArray(data.data)) {
+          setSports(data.data);
+        }
+      })
+      .catch(console.error)
+      .finally(() => setSportsLoading(false));
+  }, []);
+
+  // Fetch locations
+  useEffect(() => {
+    if (!formData.city) return;
+
+    setLoading(true);
+
+    fetch(`/api/locations?city=${formData.city}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status && Array.isArray(data.data)) {
+          setLocations(data.data);
+        } else {
+          setLocations([]);
+        }
+      })
+      .catch(() => setLocations([]))
+      .finally(() => setLoading(false));
+  }, [formData.city]);
+
 
   // Fetch slots
   useEffect(() => {
@@ -76,19 +155,19 @@ export default function ContactForm() {
     }
 
     setSlotsLoading(true);
-    const selectedLoc = locations.find(
-  (loc) => String(loc.subcategory_id) === formData.location_id
-);
-    const subcatid = selectedLoc?.subcategory_id;
 
+    const selectedLoc = locations.find(
+      (loc) => loc.subcategory_id == Number(formData.location_id)
+    );
+
+    const subcatid = selectedLoc?.subcategory_id;
     if (!subcatid) {
       setSlotsLoading(false);
       setSlots([]);
       return;
     }
 
-    const [year, month, day] = formData.booking_date.split("-");
-    const formattedDate = `${day}-${month}-${year}`;
+    const formattedDate = formData.booking_date; // FIXED
 
     fetch(`/api/slots?subcatid=${subcatid}&date=${formattedDate}`)
       .then((res) => res.json())
@@ -101,40 +180,40 @@ export default function ContactForm() {
   }, [formData.location_id, formData.booking_date, locations]);
 
   const toggleSlot = (slot: Slot) => {
-  let updatedSlots = [...formData.selectedSlots]; // array of Slot objects
-  if (updatedSlots.find(s => s.slot_rate_id === slot.slot_rate_id)) {
-    updatedSlots = updatedSlots.filter(s => s.slot_rate_id !== slot.slot_rate_id);
-    setTotal(prev => prev - slot.slot_rate);
-  } else {
-    updatedSlots.push(slot);
-    setTotal(prev => prev + slot.slot_rate);
-  }
-  setFormData(prev => ({ ...prev, selectedSlots: updatedSlots }));
-};
-
-  const handleSubmit = (e: React.FormEvent) => {
-  e.preventDefault();
-
-  const bookingData = {
-    full_name: formData.full_name?.trim() || null,
-    contact_no: formData.contact_no?.trim() || null,
-    email_id: formData.email_id?.trim() || null,
-    location_id: formData.location_id ? Number(formData.location_id) : 0,
-    booking_date: formData.booking_date || null,
-    bookedslotrate_ids:
-      formData.selectedSlots.length > 0
-        ? formData.selectedSlots.map((s) => s.slot_rate_id)
-        : null,
-    selectedSlots: formData.selectedSlots.length > 0 ? formData.selectedSlots : null,
-    total_amount: total || 0.0,
-    promo_code: null,
-    discount_amount: 0.0,
+    let updatedSlots = [...formData.selectedSlots]; // array of Slot objects
+    if (updatedSlots.find(s => s.slot_rate_id === slot.slot_rate_id)) {
+      updatedSlots = updatedSlots.filter(s => s.slot_rate_id !== slot.slot_rate_id);
+      setTotal(prev => prev - slot.slot_rate);
+    } else {
+      updatedSlots.push(slot);
+      setTotal(prev => prev + slot.slot_rate);
+    }
+    setFormData(prev => ({ ...prev, selectedSlots: updatedSlots }));
   };
 
-  console.log("Booking JSON:", bookingData);
-  localStorage.setItem("psm_booking", JSON.stringify(bookingData));
-  window.location.href = "/cart";
-};
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const bookingData = {
+      full_name: formData.full_name?.trim() || null,
+      contact_no: formData.contact_no?.trim() || null,
+      email_id: formData.email_id?.trim() || null,
+      location_id: formData.location_id ? Number(formData.location_id) : 0,
+      booking_date: formData.booking_date || null,
+      bookedslotrate_ids:
+        formData.selectedSlots.length > 0
+          ? formData.selectedSlots.map((s) => s.slot_rate_id)
+          : null,
+      selectedSlots: formData.selectedSlots.length > 0 ? formData.selectedSlots : null,
+      total_amount: total || 0.0,
+      promo_code: null,
+      discount_amount: 0.0,
+    };
+
+    console.log("Booking JSON:", bookingData);
+    localStorage.setItem("psm_booking", JSON.stringify(bookingData));
+    window.location.href = "/cart";
+  };
     return (
         <div className="w-full flex flex-col lg:flex-row min-h-[90vh]">
             {/* Left Side Image */}
@@ -192,7 +271,58 @@ export default function ContactForm() {
             />
           </div>
 
+          <select
+            name="sport_id"
+            value={formData.sport_id}
+            onChange={handleChange}
+            className="border-b border-gray-400 p-3 w-full mb-4 bg-transparent focus:border-black focus:outline-none"
+            required
+          >
+            <option value="">{sportsLoading ? "Loading Sports..." : "Select Sport"}</option>
+            {sports.map((sport) => (
+              <option key={sport.mcategory_id} value={sport.mcategory_id}>
+                {sport.mcategory_detail}   {/* Yeh text show hoga */}
+              </option>
+            ))}
+          </select>
+
+          <select
+            name="state"
+            onChange={handleChange}
+            className="border-b border-gray-400 p-3 w-full mb-4 bg-transparent focus:border-black focus:outline-none"
+            required
+          >
+            <option value="">
+              {statesLoading ? "Loading States..." : "Select State"}
+            </option>
+
+            {states.map((state, index) => (
+              <option key={index} value={state.state_name}>
+                {state.state_name}
+              </option>
+            ))}
+          </select>
+
+          <select
+            name="city"
+            value={formData.city}
+            onChange={handleChange}
+            className="border-b border-gray-400 p-3 w-full mb-4 bg-transparent focus:border-black focus:outline-none"
+            required
+          >
+            <option value="">
+              {citiesLoading ? "Loading Cities..." : "Select City"}
+            </option>
+
+            {cities.map((city) => (
+              <option key={city.city_id} value={city.city_id}>
+                {city.city_name}
+              </option>
+            ))}
+          </select>
+
           {/* Location */}
+
           <select
             name="location_id"
             value={formData.location_id}
@@ -201,6 +331,7 @@ export default function ContactForm() {
             required
           >
             <option value="">{loading ? "Loading locations..." : "Select Location"}</option>
+
             {locations.map((loc) => (
               <option key={loc.subcategory_id} value={loc.subcategory_id}>
                 {loc.subcategory_detail}

@@ -21,6 +21,11 @@ interface State {
   state_name: string;
 }
 
+interface City {
+  city_id: number;
+  city_name: string;
+}
+
 interface Sport {
   mcategory_id: number;
   mcategory_detail: string; // <-- Yeh visible text hoga dropdown me
@@ -54,8 +59,8 @@ export default function ContactForm() {
     discount_amount: 0.00
   });
 
-  const [cities, setCities] = useState<any[]>([]);
-  const [citiesLoading, setCitiesLoading] = useState(false);
+  const [cities, setCities] = useState<City[]>([]);
+  const [citiesLoading, setCitiesLoading] = useState<boolean>(false);
   const [states, setStates] = useState<State[]>([]);
   const [statesLoading, setStatesLoading] = useState(false);
   const [sports, setSports] = useState<Sport[]>([]);
