@@ -9,7 +9,9 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
 
   const hideHeaderFooter =
     pathname === "/thank-you" ||
-    pathname === "/invoice";
+     pathname === "/invoice" ||
+    pathname === "/payment-success" ||
+    pathname === "/payment-failed";
 
   return (
     <>

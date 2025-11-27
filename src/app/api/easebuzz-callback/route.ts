@@ -29,7 +29,12 @@ export async function POST(req: Request) {
         backendResponse?.data?.payment_status ||
         backendResponse?.data?.status ||
         "").toString().trim().toLowerCase();
-
+  const orderid =
+      (entries.order_id ||
+        entries.order_id ||
+        backendResponse?.data?.order_id ||
+        backendResponse?.data?.order_id ||
+        "").toString().trim().toLowerCase();
     console.log("🧾 Final Detected Payment Status:", paymentstatus);
 
     // ✅ Base URL safety (detect if env missing)
@@ -41,7 +46,7 @@ export async function POST(req: Request) {
     // ✅ Build redirect URL
     let redirectUrl = "";
     if (paymentstatus.toLowerCase() === "success") {
-      redirectUrl = `${baseUrl}payment-success`;
+      redirectUrl = `${baseUrl}payment-success?id=${orderid}`;
     } else {
       redirectUrl = `${baseUrl}payment-failed`;
     }

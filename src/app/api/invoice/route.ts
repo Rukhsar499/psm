@@ -1,9 +1,9 @@
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
-//   const order_id = searchParams.get("order_id");
+   const id = searchParams.get("id");
 
   const res = await fetch(
-    `https://psmapi.thenoncoders.in/api/v1/get_order_detail?order_id=99`,
+    `https://psmapi.thenoncoders.in/api/v1/get_order_detail?order_id=${id}`,
     {
      method: "GET",
       headers: {

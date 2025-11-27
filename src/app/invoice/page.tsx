@@ -1,8 +1,11 @@
 "use client";
+import { useSearchParams } from "next/navigation";
 import React, { useEffect } from "react";
 import Image from "next/image";
 
 export default function Invoice() {
+  const searchParams = useSearchParams();
+  const orderId = searchParams.get("id");
   interface OrderMaster {
     Customer_Name: string;
     Customer_MobileNo: string;
@@ -53,7 +56,7 @@ export default function Invoice() {
 
   useEffect(() => {
     async function fetchData() {
-      const res = await fetch(`/api/invoice`);
+      const res = await fetch(`/api/invoice?id=${orderId}`);
       const json = await res.json();
 
       if (json.status) {
@@ -97,7 +100,7 @@ export default function Invoice() {
       `}</style>
 
       <div className="invoice-wrap" id="invoice">
-        <header>
+     
           <div className="brand">
             <div className="">
               <Image
@@ -110,7 +113,7 @@ export default function Invoice() {
             <div className="title">PSM Turf – Premium Turf </div>
             <div className="sub">Plot No IIF/11, Unit No. ESNTB0202, Ecospace Business Park, Rajarhat, New Town, South Twenty Four Parganas, West Bengal, 700156</div>
           </div>
-        </header>
+       
 
         <div className="grid">
           <div className="box">
