@@ -4,52 +4,53 @@ import Image from "next/image";
 
 export default function Invoice() {
   interface OrderMaster {
-  Customer_Name: string;
-  Customer_MobileNo: string;
-  Customer_Emailid: string;
-  Location: string;
-  order_id: string;
-  slot_name: string;
-}
-
-interface OrderDetail {
-  slot_name: string;
-  booked_slot_rate: number;
-  booking_date: string;
-}
-
-interface InvoiceData {
-  status: boolean;
-  ordermaster: OrderMaster[];
-  orderdetail: OrderDetail[];
-}
-const [orderData, setOrderData] = React.useState<InvoiceData | null>(null);
-
-  useEffect(() => {
-  if (!orderData) return;
-
-  const tbody = document.getElementById("itemsBody") as HTMLTableSectionElement;
-  if (!tbody) return;
-
-  let subtotal = 0;
-  for (let r = 0; r < tbody.rows.length; r++) {
-    const amtText = tbody.rows[r].cells[4].innerText.replace(/[^0-9.-]+/g, "");
-    const val = parseFloat(amtText) || 0;
-    subtotal += val;
+    Customer_Name: string;
+    Customer_MobileNo: string;
+    Customer_Emailid: string;
+    mcategory_detail: string;
+    state_name: string;
+    category_detail: string;
+    Location: string;
+    order_id: string;
+    slot_name: string;
   }
 
-  const discount = 0;
-  const gst = +(subtotal * 0.18).toFixed(2);
-  const total = +(subtotal - discount + gst).toFixed(2);
+  interface OrderDetail {
+    slot_name: string;
+    booked_slot_rate: number;
+    booking_date: string;
+  }
 
-  document.getElementById("subtotal")!.innerText = "₹" + subtotal.toFixed(2);
-  document.getElementById("discount")!.innerText = "-₹" + discount.toFixed(2);
-  document.getElementById("gst")!.innerText = "₹" + gst.toFixed(2);
-  document.getElementById("totalPay")!.innerText = "₹" + total.toFixed(2);
+  interface InvoiceData {
+    status: boolean;
+    ordermaster: OrderMaster[];
+    orderdetail: OrderDetail[];
+  }
 
-}, [orderData]);
+  const [orderData, setOrderData] = React.useState<InvoiceData | null>(null);
 
-  
+  useEffect(() => {
+    if (!orderData) return;
+
+    const tbody = document.getElementById("itemsBody") as HTMLTableSectionElement;
+    if (!tbody) return;
+
+    let subtotal = 0;
+    for (let r = 0; r < tbody.rows.length; r++) {
+      // FIX: cell index changed 3 -> 2 because 3 columns only
+      const amtText = tbody.rows[r].cells[2].innerText.replace(/[^0-9.-]+/g, "");
+      const val = parseFloat(amtText) || 0;
+      subtotal += val;
+    }
+
+    const discount = 0;
+    const total = subtotal;
+
+    document.getElementById("discount")!.innerText = "-₹" + discount.toFixed(2);
+    document.getElementById("totalPay")!.innerText = "₹" + total.toFixed(2);
+
+  }, [orderData]);
+
   useEffect(() => {
     async function fetchData() {
       const res = await fetch(`/api/invoice`);
@@ -98,67 +99,52 @@ const [orderData, setOrderData] = React.useState<InvoiceData | null>(null);
       <div className="invoice-wrap" id="invoice">
         <header>
           <div className="brand">
-            <div className=""> <Image
-              src="/assets/img/logo.webp"
-              alt="baseball turf"
-              width="70"
-              height="150"
-              className="mb-5"
-            /></div>
+            <div className="">
+              <Image
+                src="/assets/img/logo.webp"
+                alt="baseball turf"
+                width="70"
+                height="150"
+              />
+            </div>
             <div className="title">PSM Turf – Premium Turf </div>
             <div className="sub">Plot No IIF/11, Unit No. ESNTB0202, Ecospace Business Park, Rajarhat, New Town, South Twenty Four Parganas, West Bengal, 700156</div>
           </div>
-
-          {/* <div className="invoice-meta">
-            <div className="inv-title">INVOICE</div>
-            <div className="small">Invoice #: <strong id="invoiceNo">PSM-2025-00123</strong></div>
-            <div className="small">Date: <strong id="invoiceDate">2025-11-28</strong></div>
-          </div> */}
         </header>
 
         <div className="grid">
           <div className="box">
             <h4>Billed To</h4>
-            <p><strong>Name:</strong>{orderData?.ordermaster[0]?.Customer_Name}</p>
-            <p><strong>Phone No:</strong>{orderData?.ordermaster[0]?.Customer_MobileNo}</p>
-            <p><strong>Email:</strong>{orderData?.ordermaster[0]?.Customer_Emailid}</p>
-            <p><strong>Address:</strong>{orderData?.ordermaster[0]?.Location}</p>
-
-           
-
-            
+            <p><strong>Name: </strong>{orderData?.ordermaster[0]?.Customer_Name}</p>
+            <p><strong>Phone No: </strong>{orderData?.ordermaster[0]?.Customer_MobileNo}</p>
+            <p><strong>Email: </strong>{orderData?.ordermaster[0]?.Customer_Emailid}</p>
+            <p><strong>Address: </strong>{orderData?.ordermaster[0]?.Location}</p>
           </div>
 
           <div className="box">
             <h4>Booking Details</h4>
-          
-            <p><strong>Turf Type:</strong> Baseball</p>
-            <p>{orderData?.ordermaster[0]?.slot_name}</p>
-           <p><strong>Booking Date:</strong> {orderData?.orderdetail[0]?.booking_date?.split("T")[0]}</p>
-            <p><strong>Booking ID:</strong> BK-98765</p>
-             <div><b>OrderId:</b>
-              PSM-{orderData?.ordermaster[0]?.order_id}
-            </div>
+            <p><strong>Turf Type:</strong> {orderData?.ordermaster[0]?.mcategory_detail}</p>
+            <p><strong>State Name:</strong> {orderData?.ordermaster[0]?.state_name}</p>
+            <p><strong>City:</strong> {orderData?.ordermaster[0]?.category_detail}</p>
+            <p><strong>Booking Date:</strong> {orderData?.orderdetail[0]?.booking_date?.split("T")[0]}</p>
+            <p><b>OrderId: </b>PSM-{orderData?.ordermaster[0]?.order_id}</p>
           </div>
         </div>
 
         <table>
           <thead>
-            <tr>
-              <th style={{ width: "48%" }}>Description</th>
-              <th style={{ width: "12%" }}>Duration</th>
-              <th style={{ width: "15%" }}>Rate (₹)</th>
-              <th style={{ width: "15%" }}>Qty</th>
-              <th style={{ width: "10%" }}>Amount (₹)</th>
+            <tr className="text-center">
+              <th style={{ width: "30%" }}>Description</th>
+              <th style={{ width: "30%" }}>Rate (₹)</th>
+              <th style={{ width: "30%" }}>Amount (₹)</th>
             </tr>
           </thead>
+
           <tbody id="itemsBody">
-            {orderData?.orderdetail?.map((item: any, index: number) => (
+            {orderData?.orderdetail?.map((item: OrderDetail, index: number) => (
               <tr key={index}>
                 <td>{item.slot_name}</td>
-                <td>1 hr</td>
                 <td className="text-right">{item.booked_slot_rate}</td>
-                <td className="text-right">1</td>
                 <td className="text-right">{item.booked_slot_rate}</td>
               </tr>
             ))}
@@ -176,7 +162,6 @@ const [orderData, setOrderData] = React.useState<InvoiceData | null>(null);
           <button className="btn" onClick={() => window.print()}>Print / Save PDF</button>
         </div>
       </div>
-
     </>
   );
 }
