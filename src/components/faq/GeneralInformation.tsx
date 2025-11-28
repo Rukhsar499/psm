@@ -20,7 +20,7 @@ const accordionData: AccordionInfo[] = [
     id: "address",
     title: "Q2. Where are PSM Turfs located?",
     content:
-      "You can find PSM Turfs in many convenient locations on the following - Newtown, Khiddirpore, Bally, Ranaghat, Raiganj, Siliguri and Fulbari. All the turfs have the same football experience and have been maintained for safety, comfort, and the utmost enjoyment of playing.",
+      "You can find PSM Turfs in many convenient locations on the following - West Bengal, Madhya Pradesh, Odisha and Chhatisgarh. All the turfs have the same football experience and have been maintained for safety, comfort, and the utmost enjoyment of playing.",
   },
   {
     id: "other",
