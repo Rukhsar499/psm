@@ -50,7 +50,7 @@ const Footer: React.FC = () => {
                         <div className="flex flex-col">
                             <h2 className="text-[#fff] mb-6 text-[21px] font-semibold">PSM MANAGEMENT SERVICES PVT LTD.</h2>
                             <p className="text-white/70 md:text-lg text-[14px]">
-                                Our cutting-edge football turf is in multiple locations across West Bengal. It is the perfect place for celebration, competition, and leisure. We have something for you if you&apos;re just here to play football. Enter our well-kept football field or experience the excitement of a game on our floodlit field, which is ideal for both day and night games.
+                               Our cutting-edge sports turf is in multiple locations. It is the perfect place for celebration, competition, and leisure. We have something for you if you&apos;re just here to play any sport. Enter our well-kept play field or experience the excitement of a game on our floodlit field, which is ideal for both day and night games.
                             </p>
                         </div>
                     </div>
