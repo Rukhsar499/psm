@@ -112,6 +112,7 @@ export default function Invoice() {
             </div>
             <div className="title">PSM Turf – Premium Turf </div>
             <div className="sub">Plot No IIF/11, Unit No. ESNTB0202, Ecospace Business Park, Rajarhat, New Town, South Twenty Four Parganas, West Bengal, 700156</div>
+            <div><strong>GST Number:</strong> 19AAOCP7544H1ZT</div>
           </div>
        
 
