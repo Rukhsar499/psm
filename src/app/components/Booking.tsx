@@ -179,15 +179,26 @@ export default function ContactForm() {
   }, [formData.location_id, formData.booking_date, locations]);
 
   const toggleSlot = (slot: Slot) => {
-    let updatedSlots = [...formData.selectedSlots]; // array of Slot objects
-    if (updatedSlots.find(s => s.slot_rate_id === slot.slot_rate_id)) {
-      updatedSlots = updatedSlots.filter(s => s.slot_rate_id !== slot.slot_rate_id);
-      setTotal(prev => prev - slot.slot_rate);
-    } else {
-      updatedSlots.push(slot);
-      setTotal(prev => prev + slot.slot_rate);
+    if (slot.can_book === true) {
+      alert("This slot is already booked");
+      return;
     }
-    setFormData(prev => ({ ...prev, selectedSlots: updatedSlots }));
+
+    const exists = formData.selectedSlots.some(
+      (item) => item.slot_rate_id === slot.slot_rate_id
+    );
+
+    let updatedSlots;
+    if (exists) {
+      updatedSlots = formData.selectedSlots.filter(
+        (item) => item.slot_rate_id !== slot.slot_rate_id
+      );
+    } else {
+      updatedSlots = [...formData.selectedSlots, slot];
+    }
+ console.log("Slot:", slot.slot_name, "Booked:", slot.can_book);
+    setFormData({ ...formData, selectedSlots: updatedSlots });
+   
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -355,9 +366,11 @@ export default function ContactForm() {
                   {slots.map((slot, index) => (
                     <tr
                       key={index}
-                      className={`border-t ${formData.selectedSlots?.some(s => s.slot_rate_id === slot.slot_rate_id)
+                      className={`border-t ${!slot.can_book && formData.selectedSlots.some(s => s.slot_rate_id === slot.slot_rate_id)
                         ? "bg-green-100"
-                        : "bg-white"
+                        : slot.can_book
+                          ? "bg-gray-200" // booked slot
+                          : "bg-white" // available
                         }`}
                     >
                       <td className="py-3 px-4">{slot.slot_name}</td>
@@ -365,9 +378,11 @@ export default function ContactForm() {
                       <td className="py-3 px-4 text-center">
                         <input
                           type="checkbox"
-                          checked={formData.selectedSlots?.some(s => s.slot_rate_id === slot.slot_rate_id) || false}
+                          disabled={slot.can_book}  // true = booked = disable
+                          checked={formData.selectedSlots.some(
+                            (s) => s.slot_rate_id === slot.slot_rate_id
+                          )}
                           onChange={() => toggleSlot(slot)}
-                          className="w-5 h-5 accent-[#91be4d]"
                         />
                       </td>
                     </tr>
@@ -376,7 +391,7 @@ export default function ContactForm() {
               </table>
 
               {/* Total & Proceed */}
-              <div className="flex justify-between items-center mt-6">
+              <div className="flex justify-between items-center mt-6 sticky bottom-0 bg-white py-4 border-t">
                 <h3 className="text-lg font-semibold">Total: ₹{total.toFixed(2)}</h3>
                 <button
                   type="submit"

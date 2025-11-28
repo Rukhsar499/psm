@@ -390,7 +390,7 @@ export default function ContactForm() {
               </table>
 
               {/* Total & Proceed */}
-              <div className="flex justify-between items-center mt-6">
+              <div className="flex justify-between items-center mt-6 sticky bottom-0 bg-white py-4 border-t">
                 <h3 className="text-lg font-semibold">Total: ₹{total.toFixed(2)}</h3>
                 <button
                   type="submit"
