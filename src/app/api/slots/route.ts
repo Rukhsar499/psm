@@ -19,7 +19,7 @@ export async function GET(req: Request) {
 
   try {
     const res = await fetch(
-     `https://psmapi.thenoncoders.in/api/v1/get_availableslots?subcatid=2&bdate=2025-11-28`
+     `https://psmapi.thenoncoders.in/api/v1/get_availableslots?subcatid=${subcatid}&bdate=${formattedDate}`
 ,
 
       {

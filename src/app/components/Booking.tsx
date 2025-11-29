@@ -179,7 +179,7 @@ export default function ContactForm() {
   }, [formData.location_id, formData.booking_date, locations]);
 
   const toggleSlot = (slot: Slot) => {
-    if (slot.can_book === true) {
+    if (slot.can_book === false) {
       alert("This slot is already booked");
       return;
     }
@@ -196,9 +196,9 @@ export default function ContactForm() {
     } else {
       updatedSlots = [...formData.selectedSlots, slot];
     }
- console.log("Slot:", slot.slot_name, "Booked:", slot.can_book);
+    console.log("Slot:", slot.slot_name, "Booked:", slot.can_book);
     setFormData({ ...formData, selectedSlots: updatedSlots });
-   
+
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -366,19 +366,22 @@ export default function ContactForm() {
                   {slots.map((slot, index) => (
                     <tr
                       key={index}
-                      className={`border-t ${!slot.can_book && formData.selectedSlots.some(s => s.slot_rate_id === slot.slot_rate_id)
-                        ? "bg-green-100"
-                        : slot.can_book
-                          ? "bg-gray-200" // booked slot
-                          : "bg-white" // available
-                        }`}
+                      className={`border-t 
+        ${slot.can_book === false ? "bg-gray-200" : "bg-white"}
+      `}
                     >
-                      <td className="py-3 px-4">{slot.slot_name}</td>
-                      <td className="py-3 px-4 text-center">₹{slot.slot_rate}</td>
+                      <td className="py-3 px-4">
+                        {slot.slot_name}
+                      </td>
+
+                      <td className="py-3 px-4 text-center">
+                        ₹{slot.slot_rate}
+                      </td>
+
                       <td className="py-3 px-4 text-center">
                         <input
                           type="checkbox"
-                          disabled={slot.can_book}  // true = booked = disable
+                          disabled={slot.can_book === false}   // ❌ booked -> disable
                           checked={formData.selectedSlots.some(
                             (s) => s.slot_rate_id === slot.slot_rate_id
                           )}
