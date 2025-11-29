@@ -180,16 +180,28 @@ export default function ContactForm() {
   }, [formData.location_id, formData.booking_date, locations]);
 
   const toggleSlot = (slot: Slot) => {
-    let updatedSlots = [...formData.selectedSlots]; // array of Slot objects
-    if (updatedSlots.find(s => s.slot_rate_id === slot.slot_rate_id)) {
-      updatedSlots = updatedSlots.filter(s => s.slot_rate_id !== slot.slot_rate_id);
-      setTotal(prev => prev - slot.slot_rate);
-    } else {
-      updatedSlots.push(slot);
-      setTotal(prev => prev + slot.slot_rate);
+    if (slot.can_book === false) {
+      alert("This slot is already booked");
+      return;
     }
-    setFormData(prev => ({ ...prev, selectedSlots: updatedSlots }));
+
+    const exists = formData.selectedSlots.some(
+      (item) => item.slot_rate_id === slot.slot_rate_id
+    );
+
+    let updatedSlots;
+    if (exists) {
+      updatedSlots = formData.selectedSlots.filter(
+        (item) => item.slot_rate_id !== slot.slot_rate_id
+      );
+    } else {
+      updatedSlots = [...formData.selectedSlots, slot];
+    }
+    console.log("Slot:", slot.slot_name, "Booked:", slot.can_book);
+    setFormData({ ...formData, selectedSlots: updatedSlots });
+
   };
+
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -367,24 +379,30 @@ export default function ContactForm() {
                 <tbody>
                   {slots.map((slot, index) => (
                     <tr
-                  key={index}
-                  className={`border-t ${
-                    formData.selectedSlots?.some(s => s.slot_rate_id === slot.slot_rate_id)
-                      ? "bg-green-100"
-                      : "bg-white"
-                  }`}
-                >
-                  <td className="py-3 px-4">{slot.slot_name}</td>
-                  <td className="py-3 px-4 text-center">₹{slot.slot_rate}</td>
-                  <td className="py-3 px-4 text-center">
-                    <input
-                      type="checkbox"
-                      checked={formData.selectedSlots?.some(s => s.slot_rate_id === slot.slot_rate_id) || false}
-                      onChange={() => toggleSlot(slot)}
-                      className="w-5 h-5 accent-[#91be4d]"
-                    />
-                  </td>
-                </tr>
+                      key={index}
+                      className={`border-t 
+        ${slot.can_book === false ? "bg-gray-200" : "bg-white"}
+      `}
+                    >
+                      <td className="py-3 px-4">
+                        {slot.slot_name}
+                      </td>
+
+                      <td className="py-3 px-4 text-center">
+                        ₹{slot.slot_rate}
+                      </td>
+
+                      <td className="py-3 px-4 text-center">
+                        <input
+                          type="checkbox"
+                          disabled={slot.can_book === false}   // ❌ booked -> disable
+                          checked={formData.selectedSlots.some(
+                            (s) => s.slot_rate_id === slot.slot_rate_id
+                          )}
+                          onChange={() => toggleSlot(slot)}
+                        />
+                      </td>
+                    </tr>
                   ))}
                 </tbody>
               </table>
