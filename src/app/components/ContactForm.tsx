@@ -226,6 +226,21 @@ export default function ContactForm() {
     localStorage.setItem("psm_booking", JSON.stringify(bookingData));
     window.location.href = "/cart";
   };
+
+  useEffect(() => {
+  const totalAmount = formData.selectedSlots.reduce(
+    (sum, slot) => sum + slot.slot_rate,
+    0
+  );
+
+  setTotal(totalAmount);
+
+  // optional: agar formData me bhi total rakhna hai
+  setFormData((prev) => ({
+    ...prev,
+    total_amount: totalAmount,
+  }));
+}, [formData.selectedSlots]);
     return (
         <div className="w-full flex flex-col lg:flex-row min-h-[90vh]">
             {/* Left Side Image */}

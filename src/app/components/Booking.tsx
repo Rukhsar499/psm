@@ -165,6 +165,7 @@ export default function ContactForm() {
       setSlots([]);
       return;
     }
+    
 
     const formattedDate = formData.booking_date; // FIXED
 
@@ -200,6 +201,7 @@ export default function ContactForm() {
     setFormData({ ...formData, selectedSlots: updatedSlots });
 
   };
+  
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -224,6 +226,21 @@ export default function ContactForm() {
     localStorage.setItem("psm_booking", JSON.stringify(bookingData));
     window.location.href = "/cart";
   };
+
+  useEffect(() => {
+  const totalAmount = formData.selectedSlots.reduce(
+    (sum, slot) => sum + slot.slot_rate,
+    0
+  );
+
+  setTotal(totalAmount);
+
+  // optional: agar formData me bhi total rakhna hai
+  setFormData((prev) => ({
+    ...prev,
+    total_amount: totalAmount,
+  }));
+}, [formData.selectedSlots]);
 
   return (
     <div className="container mx-auto px-4 flex justify-center mb-[80px]">
